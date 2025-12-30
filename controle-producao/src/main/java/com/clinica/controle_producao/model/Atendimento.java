@@ -52,12 +52,12 @@ public class Atendimento {
 
     // Relacionamento com paciente
     @ManyToOne
-    @JoinColumn(name = "paciente_id", nullable = false)
+    @JoinColumn(name = "id_paciente", nullable = false)
     private Paciente paciente;
 
     // Relacionamento com profissional
     @ManyToOne
-    @JoinColumn(name = "profissional_id", nullable = false)
+    @JoinColumn(name = "id_profissional", nullable = false)
     private Profissional profissional;
 
 }
