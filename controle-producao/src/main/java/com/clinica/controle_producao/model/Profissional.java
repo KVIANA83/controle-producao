@@ -28,5 +28,10 @@ public class Profissional {
 
     @Column(name = "especialidade", nullable = false)
     private String especialidade;
+
+    public Object getNome() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getNome'");
+    }
     
 }

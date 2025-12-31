@@ -19,10 +19,10 @@ public class ProfissionalService {
     private final ProfissionalRepository repository;
 
     public Profissional salvar(ProfissionalDTO profissionalDTO) {
-        if (profissionalDTO.getNome() == null || profissionalDTO.getNome().isBlank()) {
+        if (profissionalDTO.getNomeProfissional() == null || profissionalDTO.getNomeProfissional().isBlank()) {
             throw new ValidacaoException("Nome do profissional é obrigatório");
         }
-        return repository.save(profissionalDTO);
+        return repository.salvar(profissionalDTO);
     }
 
     public List<Profissional> listarTodos() {

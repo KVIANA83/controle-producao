@@ -1,5 +1,6 @@
 package com.clinica.controle_producao.controller;
 
+import org.jspecify.annotations.Nullable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,7 +21,7 @@ public class ProfissionalController {
     private final ProfissionalService service;
     
     @PostMapping
-    public ResponseEntity<ProfissionalDTO> criarProfissional(@RequestBody ProfissionalDTO profissionalDTO) {
+    public ResponseEntity<@Nullable Object> criarProfissional(@RequestBody ProfissionalDTO profissionalDTO) {
         // Lógica para criar um novo profissional
         return ResponseEntity
                 .status(HttpStatus.CREATED)

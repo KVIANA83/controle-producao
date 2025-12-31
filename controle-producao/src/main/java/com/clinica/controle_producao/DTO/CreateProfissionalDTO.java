@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProfissionalDTO {
+public class CreateProfissionalDTO {
     
     private Long idProfissional;
     private String nomeProfissional;
     private String especialidade;
-    
+
 }
