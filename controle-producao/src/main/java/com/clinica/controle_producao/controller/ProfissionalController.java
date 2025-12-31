@@ -25,6 +25,6 @@ public class ProfissionalController {
         // Lógica para criar um novo profissional
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(.service.save(profissionalDTO));
+                .body(service.save(profissionalDTO));
     }
 }

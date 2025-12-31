@@ -30,7 +30,7 @@ public class Profissional {
     private String especialidade;
 
     public Object getNome() {
-        // TODO Auto-generated method stub
+        
         throw new UnsupportedOperationException("Unimplemented method 'getNome'");
     }
     

@@ -40,12 +40,12 @@ public class ProfissionalService {
     }
 
     public static Object toEntity(ProfissionalDTO profissionalDTO) {
-        // TODO Auto-generated method stub
+        
         throw new UnsupportedOperationException("Unimplemented method 'toEntity'");
     }
 
     public @Nullable Object save(Object entity) {
-        // TODO Auto-generated method stub
+        
         throw new UnsupportedOperationException("Unimplemented method 'save'");
     }
     
