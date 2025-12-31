@@ -38,19 +38,19 @@ public class ProfissionalController {
     }
 
     // Listar profissionais por ID
-    @PostMapping("/profissional/{id}")
+    @GetMapping("/profissional/{id}")
     public ResponseEntity<List<ProfissionalDTO>> buscarPorId(@PathVariable Long id) {
         return ResponseEntity.ok(profissionalService.buscarPorId(id));
     }
 
     // Listar profissionais por especialidade
-    @PostMapping("/profissional/{especialidade}")
+    @GetMapping("/profissional/{especialidade}")
     public ResponseEntity<List<ProfissionalDTO>> buscarPorEspecialidade(@PathVariable String especialidade) {
         return ResponseEntity.ok(profissionalService.buscarPorEspecialidade(especialidade));
     }
 
     // Listar profissionais por nome
-    @PostMapping("/profissional/{nomeProfissional}")
+    @GetMapping("/profissional/{nomeProfissional}")
     public ResponseEntity<List<ProfissionalDTO>> buscarPorNome(@PathVariable String nomeProfissional) {
         return ResponseEntity.ok(profissionalService.buscarPorNome(nomeProfissional));
     }
