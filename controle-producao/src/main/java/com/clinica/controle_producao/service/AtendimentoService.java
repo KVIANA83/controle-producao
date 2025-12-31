@@ -23,10 +23,10 @@ public class AtendimentoService {
     private final PacienteRepository pacienteRepository;
     private final ProfissionalRepository profissionalRepository;
 
-    public AtendimentoDTO criarAtendimento(CreateAtendimentoDTO dto) {
+    public AtendimentoDTO criarAtendimento(CreateAtendimentoDTO dto, boolean statusAtendimento) {
 
-        Paciente paciente = pacienteRepository.findByIdAtendimento(dto.getIdPaciente())
-            .orThrow(() -> new RuntimeException("Paciente não encontrado"));
+        Paciente paciente = pacienteRepository.findById(dto.getIdPaciente())
+            .orElseThrow(() -> new RuntimeException("Paciente não encontrado"));
 
         Profissional profissional = profissionalRepository.findByIdProfissional(dto.getIdProfissional())
             .orElseThrow(() -> new RuntimeException("Profissional não encontrado"));
@@ -35,6 +35,7 @@ public class AtendimentoService {
         int tempoAtendimento = tea ? 60 : 40;
         DayOfWeek diaSemana = dto.getDataAtendimento().getDayOfWeek();
 
+        /* 
         boolean isStatusAtendimento;
         Atendimento atendimento = atendimento.builder()
                 .dataAtendimento(dto.getDataAtendimento())
@@ -44,6 +45,17 @@ public class AtendimentoService {
                 .statusAtendimento(isStatusAtendimento)
                 .paciente(dto.getIdPaciente())
                 .profissional(dto.getIdProfissional())
+                .build();
+        */
+
+        Atendimento atendimento = Atendimento.builder()
+                .dataAtendimento(dto.getDataAtendimento())
+                .diaSemana(diaSemana)
+                .tempoAtendimento(tempoAtendimento)
+                .tea(tea)
+                .statusAtendimento(statusAtendimento)
+                .paciente(paciente)
+                .profissional(profissional)
                 .build();
 
         Atendimento salvo = atendimentoRepository.save(atendimento);

@@ -24,7 +24,7 @@ public class AtendimentoController {
     public ResponseEntity<AtendimentoDTO> criar(@RequestBody CreateAtendimentoDTO dto) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(atendimentoService.criarAtendimento(dto));
+                .body(atendimentoService.criarAtendimento(dto, false));
     }
     
 }
