@@ -2,11 +2,9 @@ package com.clinica.controle_producao.service;
 
 import java.util.List;
 
-import org.jspecify.annotations.Nullable;
 import org.springframework.stereotype.Service;
 
 import com.clinica.controle_producao.DTO.ProfissionalDTO;
-import com.clinica.controle_producao.exceptions.ValidacaoException;
 import com.clinica.controle_producao.model.Profissional;
 import com.clinica.controle_producao.repositories.ProfissionalRepository;
 
@@ -16,37 +14,59 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ProfissionalService {
     
-    private final ProfissionalRepository repository;
+    private static final ProfissionalRepository profissionalRepository = null;
 
-    public Profissional salvar(ProfissionalDTO profissionalDTO) {
-        if (profissionalDTO.getNomeProfissional() == null || profissionalDTO.getNomeProfissional().isBlank()) {
-            throw new ValidacaoException("Nome do profissional é obrigatório");
-        }
-        return repository.salvar(profissionalDTO);
+    // Criar profissional
+    public ProfissionalDTO criarProfissional(ProfissionalDTO dto) {
+
+        Profissional profissional = new Profissional();
+        profissional.setNomeProfissional(dto.getNomeProfissional());
+        profissional.setEspecialidade(dto.getEspecialidade());
+
+        Profissional salvo = profissionalRepository.save(profissional);
+
+        return toDTO(salvo);
     }
 
-    public List<Profissional> listarTodos() {
-        return repository.findAll();
+    // Buscar profissional por ID
+    public List<ProfissionalDTO> buscarPorId(Long idProfissional) {
+
+        Profissional profissional = profissionalRepository.findByIdProfissional(idProfissional)
+                .orElseThrow(() -> new RuntimeException("Profissional não encontrado"));
+
+        return List.of(toDTO(profissional));
+
     }
 
-    public Profissional buscarPorId(Long id) {
-        return repository.findById(id)
-                .orElseThrow(() -> new ValidacaoException("Profissional não encontrado"));
+    // Listar todos os profissionais
+    public List<ProfissionalDTO> listarTodos() {
+        List<Profissional> profissionais = profissionalRepository.findAll();
+        return profissionais.stream().map(this::toDTO).toList();
     }
 
-    public void deletar(Long id) {
-        buscarPorId(id); // valida se existe
-        repository.deleteById(id);
+    // Buscar profissional por especialidade
+    public List<ProfissionalDTO> buscarPorEspecialidade(String especialidade) {
+        Profissional profissional = profissionalRepository.findByEspecialidade(especialidade)
+                .orElseThrow(() -> new RuntimeException("Profissional não encontrado"));
+
+        return List.of(toDTO(profissional));
     }
 
-    public static Object toEntity(ProfissionalDTO profissionalDTO) {
-        
-        throw new UnsupportedOperationException("Unimplemented method 'toEntity'");
+    // Buscar profissional por nome
+    public List<ProfissionalDTO> buscarPorNome(String nomeProfissional) {
+        Profissional profissional = profissionalRepository.findByNomeProfissional(nomeProfissional)
+                .orElseThrow(() -> new RuntimeException("Profissional não encontrado"));
+
+        return List.of(toDTO(profissional));
     }
 
-    public @Nullable Object save(Object entity) {
-        
-        throw new UnsupportedOperationException("Unimplemented method 'save'");
+    // Conversão Entity → DTO
+    private ProfissionalDTO toDTO(Profissional profissional) {
+        return ProfissionalDTO.builder()
+                .idProfissional(profissional.getIdProfissional())
+                .nomeProfissional(profissional.getNomeProfissional())
+                .especialidade(profissional.getEspecialidade())
+                .build();
     }
-    
+
 }
