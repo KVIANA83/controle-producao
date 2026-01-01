@@ -46,6 +46,10 @@ public class Atendimento {
     @Column(name = "tea")
     private boolean tea;
 
+    // especialidade
+    @Column(name="especialidade")
+    private String especialidade;
+
     // Status do atendimento (atendido ou não)
     @Column(name = "status_atendimento")
     private boolean statusAtendimento;
